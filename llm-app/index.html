@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Локальный ИИ-ассистент</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Локальный ИИ-ассистент</h1>
+        <span class="badge">ОФЛАЙН</span>
+    </div>
+    <p>Задайте вопрос — нейросеть ответит, используя только локальные ресурсы компьютера.</p>
+
+    <textarea id="prompt" placeholder="Например: Объясни, что такое нейронные сети, простыми словами"></textarea>
+    <br>
+    <button onclick="ask()">Сгенерировать</button>
+    <div id="result"></div>
+
+    <script>
+        // Отправка по Enter
+        document.getElementById('prompt').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                ask();
+            }
+        });
+
+        async function ask() {
+            const prompt = document.getElementById('prompt').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Думаю...';
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({prompt: prompt})
+                });
+                const data = await response.json();
+                if (data.error) {
+                    resultDiv.innerHTML = ' Х ' + data.response;
+                } else {
+                    resultDiv.innerHTML = '<strong>Ответ ассистента:</strong><br><br>' + data.response;
+                }
+            } catch(error) {
+                resultDiv.innerHTML = 'Ошибка соединения: ' + error;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -58,3 +58,4 @@ htmlcov/
 .env.*
 !env.example
 token.txt
+someNotesAboutWork.txt
