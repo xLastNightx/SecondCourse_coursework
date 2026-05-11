@@ -6,13 +6,13 @@
 <pre><code>
 SecondCourse_coursework
 ├──llm-app/
-│    ├── app.py          (само приложение)  
+│    ├── app.py         
 |    ├── index.html
 |    ├── style.css
-│    └── requirements.txt    (зависимости Python)
+│    └── requirements.txt   
 ├──venv
 ├──requirements.txt
-└── README.md           (уже есть)    
+└── README.md               
 </code></pre>
 
 Чтобы запустить проект, надо: 
