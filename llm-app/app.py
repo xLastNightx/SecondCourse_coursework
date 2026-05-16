@@ -4,6 +4,9 @@ from openai import OpenAI
 import sys
 import os
 
+# Определяем путь к папке, где лежит app.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # ОТКЛЮЧЕНИЕ СИСТЕМНОГО ПРОКСИ
 
 # На некоторых компьютерах настроен HTTP-прокси (VPN, корпоративная сеть). Библиотека httpx (внутри openai) пытается пропускать через него даже
@@ -70,6 +73,13 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/css; charset=utf-8')
             self.end_headers()
             with open('llm-app/style.css', 'r', encoding='utf-8') as f:
+                self.wfile.write(f.read().encode('utf-8'))
+
+        elif self.path == '/script.js':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/javascript; charset=utf-8')
+            self.end_headers()
+            with open(os.path.join(BASE_DIR, 'script.js'), 'r', encoding='utf-8') as f:
                 self.wfile.write(f.read().encode('utf-8'))
 
         elif self.path == '/health':

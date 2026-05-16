@@ -9,6 +9,7 @@ SecondCourse_coursework
 │    ├── app.py         
 |    ├── index.html
 |    ├── style.css
+|    ├── script.js
 │    └── requirements.txt   
 ├──venv
 ├──requirements.txt
