@@ -117,7 +117,7 @@ class Handler(BaseHTTPRequestHandler):
                         messages=[
                             {"role": "user", "content": prompt}
                         ],
-                        max_tokens=2000,   # Максимальная длина ответа
+                        max_tokens=20000,   # Максимальная длина ответа
                         temperature=0.8,  # Креативность (0 — сухо, 1 — творчески)
                     )
                     # Извлекаем текст ответа
